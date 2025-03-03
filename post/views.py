@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import get_object_or_404, render,redirect
 from django.contrib.auth.decorators import login_required
 from django.utils.text import slugify
 from post.models import Post, Tag, Follow, Stream
@@ -39,6 +39,15 @@ def new_post(request):
         form=NewPostForm()
     context={'form':form}
     return render(request,'post/newpost.html',context)
+
+
+def viewPost(request,id):
+    post=get_object_or_404(Post,id=id)
+    context={
+        'post':post
+    }
+    return render(request,'post/viewpost.html',context)
+
 
 # Create your views here.
 
